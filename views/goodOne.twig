@@ -1,0 +1,16 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+        <h1>
+            {{ good.nameGood }}
+        </h1>
+        <p>
+            Price: {{ good.price }} c.u.
+        </p>
+        <p>
+            Information: {{ good.info }}
+        </p>
+        <a href="/basket/add?id={{ good.id }}">Добавить в корзину</a>
+        <a href="/good/del?id={{ good.id }}">Удалить товар</a>
+        <hr>
+{% endblock %}

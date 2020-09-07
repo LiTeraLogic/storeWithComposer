@@ -1,0 +1,56 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    {% set  total = 0 %}
+    {% for number in orders %}
+        <h3>
+            <a href="/order/one?id={{ number.id }}">
+                <p>
+                    Заказ № {{ number.id  }}
+                </p>
+            </a>
+
+        </h3>
+        <p>
+            Пользователь: {{ number.userName }}
+        </p>
+        {% if number.address != NULL %}
+        <p>
+            Адрес: {{ number.address }}
+        </p>
+        {% endif %}
+        {% if number.address != NULL %}
+            <p>
+                Телефон: {{ number.tel }}
+            </p>
+        {% endif %}
+
+        <p>
+            Статус заказа: {{ number.status }}
+        </p>
+        <p>
+            Сумма заказа: {{ number.price }} c.u.
+        </p>
+        <a href="/order/del?id={{ number.id }}">Удалить заказ</a>
+        <h3>Изменение статуса заказа</h3>
+        <form method="post" action="/order/update?id={{ number.id }}">
+            <input name="status" placeholder="status" value="{{ number.status }}">
+            <button>Изменить</button>
+        </form>
+        <hr>
+    {% else %}
+        <hr>
+    {% endfor %}
+        <!--<h2>Total: {{ totalPrice }} c.u.</h2>
+        <h3>Форма заказа</h3>
+        <form method="post" action="/order/insert?price={{ totalPrice }}">
+            <h5>Логин</h5>
+            <input name="userName" placeholder="userName" value="ADMIN">
+            <h5>Город</h5>
+            <input name="address" placeholder="address" value="CITY">
+            <h5>Телефон</h5>
+            <input name="tel" placeholder="tel" value="+79354965215">
+            <button>Заказать</button>
+        </form>-->
+
+{% endblock %}

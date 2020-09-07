@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{{ title }}{% endblock %}</title>
+</head>
+<body>
+<ul>
+    {% for item in menu %}
+        {% if item.name == 'Корзина' %}
+            <li><a href="{{ item.href }}">{{ item.name }} {{ item.count }}</a></li>
+        {% else %}
+        <li><a href="{{ item.href }}">{{ item.name }}</a></li>
+        {% endif %}
+    {% else %}
+        <li><a href="/">Главная</a></li>
+    {% endfor %}
+
+</ul>
+
+<div class="">
+    {% block content %}
+        <h1>Welcome!</h1>
+    {% endblock %}
+</div>
+</body>
+</html>

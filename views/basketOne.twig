@@ -1,0 +1,44 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    {% set  total = 0 %}
+    {% for number in basket %}
+        <h3>
+            <a href="/good/one?id={{ number.good.id }}">
+                {{ number.good.nameGood }}
+            </a>
+        </h3>
+        <p>
+            Price: {{ number.good.price }} c.u.
+        </p>
+        <p>
+            Count: {{ number.count }}
+        </p>
+        <a href="/basket/add?id={{ number.good.id }}">Добавить</a>
+        <a href="/basket/del?id={{ number.good.id }}">Удалить</a>
+        <hr>
+        {% set total = total +  number.count * number.good.price %}
+    {% else %}
+        <hr>
+    {% endfor %}
+    {% if total == 0 %}
+        <p>Basket is empty</p>
+    {% else %}
+        <!--<h2>Total: {{ total }} c.u.</h2>-->
+        <h2>Total: {{ totalPrice }} c.u.</h2>
+        <h3>Форма заказа</h3>
+        <form method="post" action="/order/insert?price={{ totalPrice }}">
+            <h5>Логин</h5>
+            <input name="userName" placeholder="userName" value="ADMIN">
+            <h5>Город</h5>
+            <input name="address" placeholder="address" value="CITY">
+            <h5>Телефон</h5>
+            <input name="tel" placeholder="tel" value="+79354965215">
+            <button>Заказать</button>
+        </form>
+        <!--<h3>
+            <a href="/order/insert?price={{ total }}">Заказать</a>
+        </h3>-->
+    {% endif %}
+
+{% endblock %}

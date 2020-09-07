@@ -1,0 +1,57 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    <h3>
+        <a href="/order/one?id={{ order.id }}">
+            <p>
+                Заказ № {{ order.id  }}
+            </p>
+        </a>
+    </h3>
+    <p>
+        Пользователь: {{ order.userName }}
+    </p>
+    {% if order.address != NULL %}
+        <p>
+            Адрес: {{ order.address }}
+        </p>
+    {% endif %}
+    {% if order.address != NULL %}
+        <p>
+            Телефон: {{ order.tel }}
+        </p>
+    {% endif %}
+
+    <p>
+        Статус заказа: {{ order.status }}
+    </p>
+    <p>
+        Сумма заказа: {{ order.price }} c.u.
+    </p>
+    <a href="/order/del?id={{ order.id }}">Удалить заказ</a>
+    <h3>Изменение статуса заказа</h3>
+    <form method="post" action="/order/update?id={{ order.id }}">
+        <input name="status" placeholder="status" value="{{ order.status }}">
+        <button>Изменить</button>
+    </form>
+    <hr>
+    {% for key, number in order.orderData %}
+        <h3>
+            <a href="/good/one?id={{ number.good.id }}">
+               Товар: {{ number.good.nameGood }}
+            </a>
+        </h3>
+        <p>
+            Price: {{ number.good.price }} c.u.
+        </p>
+        <p>
+            Count: {{ number.count }}
+        </p>
+        <p>
+            <!--Total: {{ number.cost * number.good.price }} c.u.-->
+        </p>
+        <hr>
+    {% else %}
+        <hr>
+    {% endfor %}
+{% endblock %}

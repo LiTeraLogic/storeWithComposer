@@ -1,0 +1,8 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+        <h1>{{ user.login }}</h1>
+        <p>Address: {{ user.address }}</p>
+        <p>Telephone: {{ user.tel }}</p>
+        <a href="/user/del?id={{ user.id }}">Удалить пользователя</a>
+{% endblock %}
